@@ -13,6 +13,15 @@ return { -- LSP Configuration & Plugins
     -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
     { 'folke/neodev.nvim', opts = {} },
+    {
+      'folke/neoconf.nvim',
+      config = function()
+        require('neoconf').setup {
+          -- override any of the default settings here
+        }
+      end,
+    },
+    { 'b0o/SchemaStore.nvim', lazy = true },
   },
   config = function()
     -- Brief aside: **What is LSP?**
@@ -155,6 +164,16 @@ return { -- LSP Configuration & Plugins
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
+      lemminx = {},
+      jsonls = {
+        on_new_config = function(config)
+          if not config.settings.json.schemas then
+            config.settings.json.schemas = {}
+          end
+          vim.list_extend(config.settings.json.schemas, require('schemastore').json.schemas())
+        end,
+        settings = { json = { validate = { enable = true } } },
+      },
       -- clangd = {},
       -- gopls = {},
       -- pyright = {},
@@ -197,6 +216,12 @@ return { -- LSP Configuration & Plugins
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       'stylua', -- Used to format Lua code
+      'jdtls',
+      'java-debug-adapter',
+      'java-test',
+      'lemminx',
+      'markdownlint',
+      'json-lsp',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
