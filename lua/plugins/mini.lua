@@ -69,10 +69,9 @@ return { -- Collection of various small independent plugins/modules
       return '%2l:%-2v'
     end
 
-    -- theme everforest
-    require('mini.base16').setup {
-      palette = catppuccin_platte,
-    }
+    -- require('mini.base16').setup {
+    --   palette = catppuccin_platte,
+    -- }
 
     -- ... and there is more!
     --  Check out: https://github.com/echasnovski/mini.nvim
