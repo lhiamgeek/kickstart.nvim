@@ -29,6 +29,9 @@ return { -- LSP Configuration & Plugins
           ui = {
             kind = require('catppuccin.groups.integrations.lsp_saga').custom_kind(),
           },
+          lightbulb = {
+            enable = false,
+          },
         }
       end,
       dependencies = {
