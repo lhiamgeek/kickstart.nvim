@@ -41,6 +41,7 @@ return { -- You can easily change to a different colorscheme.
         telescope = {
           style = 'nvchad',
         },
+        harpoon = true,
       },
       custom_highlights = function(colors)
         return {
