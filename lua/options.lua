@@ -77,3 +77,6 @@ vim.opt.laststatus = 3
 
 -- hide empty fill char
 vim.opt.fillchars = 'eob: '
+
+-- line space
+vim.opt.linespace = 8
