@@ -6,6 +6,15 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-neotest/nvim-nio',
+      {
+        'rcasia/neotest-java',
+        keys = {
+          -- stylua: ignore start
+          {"<leader>tD", function() require("jdtls.dap").test_class() end, mode = "n", desc = "Test class" },
+          {"<leader>td", function() require("jdtls.dap").test_nearest_method() end, mode = "n", "Test method"},
+          -- stylua: ignore end
+        },
+      },
     },
     -- stylua: ignore start
     keys = {
@@ -21,7 +30,7 @@ return {
       { '[T', function() require('neotest').jump.prev() end, desc = 'previous test'},
     },
     -- stylua: ignore end
-    config = function(_, opts)
+    config = function()
       vim.diagnostic.config({
         virtual_text = {
           format = function(diagnostic)
@@ -30,7 +39,14 @@ return {
           end,
         },
       }, vim.api.nvim_create_namespace 'neotest')
-      require('neotest').setup(opts)
+      ---@diagnostic disable-next-line: missing-fields
+      require('neotest').setup {
+        adapters = {
+          ['neotest-java'] = {
+            -- config here
+          },
+        },
+      }
     end,
   },
 }
