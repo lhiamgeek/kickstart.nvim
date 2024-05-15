@@ -43,6 +43,7 @@ return { -- You can easily change to a different colorscheme.
         },
         harpoon = true,
         neotest = true,
+        diffview = true,
       },
       custom_highlights = function(colors)
         return {
