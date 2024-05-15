@@ -42,6 +42,7 @@ return { -- You can easily change to a different colorscheme.
           style = 'nvchad',
         },
         harpoon = true,
+        neotest = true,
       },
       custom_highlights = function(colors)
         return {
