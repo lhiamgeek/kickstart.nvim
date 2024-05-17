@@ -17,6 +17,10 @@ local on_attach = function(_, _)
   jdtls_dap.setup_dap_main_class_configs()
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.workspace.configuration = true
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
   -- The command that starts the language server
@@ -123,7 +127,9 @@ local config = {
   },
 
   on_attach = on_attach,
+  capabilities = capabilities,
 }
+config.init_options.extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 -- This strts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 jdtls.start_or_attach(config)

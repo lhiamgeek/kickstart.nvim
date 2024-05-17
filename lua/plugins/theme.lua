@@ -44,6 +44,15 @@ return { -- You can easily change to a different colorscheme.
         harpoon = true,
         neotest = true,
         diffview = true,
+        ---@diagnostic disable-next-line: missing-fields
+        native_lsp = {
+          underlines = {
+            errors = { 'undercurl' },
+            hints = { 'undercurl' },
+            warnings = { 'undercurl' },
+            information = { 'undercurl' },
+          },
+        },
       },
       custom_highlights = function(colors)
         return {
